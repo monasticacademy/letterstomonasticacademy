@@ -29,6 +29,9 @@ jobs:
           AIRTABLE_TABLE_NAME: ${{ vars.AIRTABLE_TABLE_NAME }}
         run: python scripts/sync-testimonials.py
 
+      - name: Verify rendered HTML still passes tests
+        run: python -m unittest discover -s tests -v
+
       - name: Commit and push if changed
         run: |
           if [ -z "$(git status --porcelain testimonials.html)" ]; then
