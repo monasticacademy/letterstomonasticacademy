@@ -58,9 +58,11 @@ def render_block(record):
     attribution = (fields.get("Name") or "").strip()
     if not body:
         return None
-    body_html = html.escape(body)
+    # quote=False because we're inserting into element text, not attribute values;
+    # quotes don't need escaping there and the source is uglier with &#x27;.
+    body_html = html.escape(body, quote=False)
     if attribution:
-        attr_html = f"<em>— {html.escape(attribution)}</em>"
+        attr_html = f"<em>— {html.escape(attribution, quote=False)}</em>"
         return f'    <div class="testimonial">{body_html}{attr_html}</div>'
     return f'    <div class="testimonial">{body_html}</div>'
 
