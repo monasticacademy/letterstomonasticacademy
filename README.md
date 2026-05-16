@@ -10,7 +10,7 @@
 
 ## How to review submissions
 
-Open the **Testimonials** table in the **Community** base and change a row's `Status` to `Publish` or `Rejected`.
+Open the [**Testimonials**](https://airtable.com/app3KoZGg1uwP1RZn/tblPhcAnbKSGrDgwn) table in the **Community** base and change a row's `Status` to `Publish` or `Rejected`.
 
 ## Pieces
 
