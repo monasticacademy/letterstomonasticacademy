@@ -24,12 +24,9 @@ Open the [**Testimonials**](https://airtable.com/app3KoZGg1uwP1RZn/tblPhcAnbKSGr
   - `Status` — `Needs Review` (default) / `Publish` / `Rejected`
   - `Related Community Member` — internal-only link to a person; not rendered on the site
 
-### Airtable automations
+### Airtable automation
 
-Two automations run inside the base:
-
-1. **Match submitter to community member** — on new row, look up the submitted email against the Community Members table and populate `Related Community Member` if found.
-2. **Notify on approval** — when a row's `Status` changes to `Publish`, send the submitter an email letting them know the testimonial has been approved and will appear on the site within 30 minutes (matches the 15-min sync cadence plus deploy time).
+**Match submitter to community member** — on new row, look up the submitted email against the Community Members table and populate `Related Community Member` if found.
 
 ### GitHub
 
