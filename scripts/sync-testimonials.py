@@ -21,6 +21,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -41,10 +42,18 @@ def fetch_records(token, base_id, table):
             params["offset"] = offset
         url = f"{base_url}?{urllib.parse.urlencode(params)}"
         req = urllib.request.Request(
-            url, headers={"Authorization": f"Bearer {token}"}
+            url,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Accept": "application/json",
+            },
         )
-        with urllib.request.urlopen(req) as resp:
-            data = json.loads(resp.read())
+        try:
+            with urllib.request.urlopen(req) as resp:
+                data = json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"Airtable API HTTP {e.code}: {body}") from e
         records.extend(data.get("records", []))
         offset = data.get("offset")
         if not offset:
