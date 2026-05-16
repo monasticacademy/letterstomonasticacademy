@@ -2,17 +2,15 @@
 
 ## Flow
 
-1. Visitor submits a testimonial via the embedded form on **letterstomonasticacademy.com**
-2. The submission lands in Airtable with `Status = Needs Review` (the field default)
-3. You approve or reject it — either via the Review interface or directly in the table
+1. Visitor submits a testimonial via the embedded form on **truthaboutmonasticacademy.com**
+2. The submission lands in [Airtable](https://airtable.com/app3KoZGg1uwP1RZn/tblPhcAnbKSGrDgwn) with `Status = Needs Review` (the field default)
+3. You approve or reject it by changing the row's `Status` to `Publish` or `Rejected`
 4. A GitHub Action runs every 15 minutes and publishes everything where `Status = Publish`
 5. GitHub Pages auto-deploys; the change is live within seconds of the commit
 
 ## How to review submissions
 
-**Easy way** — The [Testimonial Review interface](https://airtable.com/app3KoZGg1uwP1RZn/pagn9NFjM2qBUjFvY). One-click Approve / Reject, with pencil icons for fixing typos before publishing.
-
-**Direct way** — Open the **Testimonials** table in the **Community** base and change a row's `Status` to `Publish` or `Rejected`. Same underlying data as the interface.
+Open the **Testimonials** table in the **Community** base and change a row's `Status` to `Publish` or `Rejected`.
 
 ## Pieces
 
