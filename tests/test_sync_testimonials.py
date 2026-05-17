@@ -78,16 +78,16 @@ class RenderBlockTests(unittest.TestCase):
         self.assertIn("Hello world.", out)
         self.assertIn("<em>— Anonymous</em>", out)
 
-    def test_body_only_no_attribution(self):
+    def test_missing_name_defaults_to_anonymous(self):
         out = sync.render_block({"fields": {"Testimonial": "Just a body."}})
         self.assertIn("Just a body.", out)
-        self.assertNotIn("<em>", out)
+        self.assertIn("<em>— Anonymous</em>", out)
 
-    def test_attribution_blank_string_omitted(self):
+    def test_blank_name_defaults_to_anonymous(self):
         out = sync.render_block({
             "fields": {"Testimonial": "Body.", "Name": "   "}
         })
-        self.assertNotIn("<em>", out)
+        self.assertIn("<em>— Anonymous</em>", out)
 
     def test_empty_body_returns_none(self):
         self.assertIsNone(sync.render_block({"fields": {"Testimonial": "   "}}))
@@ -119,7 +119,7 @@ class RenderBlockTests(unittest.TestCase):
 
 
 class RenderAllTests(unittest.TestCase):
-    def test_sorts_by_created_time_ascending(self):
+    def test_sorts_by_created_time_descending(self):
         records = [
             {"fields": {"Testimonial": "C"}, "createdTime": "2025-01-03"},
             {"fields": {"Testimonial": "A"}, "createdTime": "2025-01-01"},
@@ -127,8 +127,8 @@ class RenderAllTests(unittest.TestCase):
         ]
         out = sync.render_all(records)
         joined = "\n".join(out)
-        self.assertLess(joined.index(">A<"), joined.index(">B<"))
-        self.assertLess(joined.index(">B<"), joined.index(">C<"))
+        self.assertLess(joined.index(">C<"), joined.index(">B<"))
+        self.assertLess(joined.index(">B<"), joined.index(">A<"))
 
     def test_skips_empty_bodies(self):
         records = [

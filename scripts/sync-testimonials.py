@@ -64,21 +64,19 @@ def fetch_records(token, base_id, table):
 def render_block(record):
     fields = record.get("fields", {})
     body = (fields.get("Testimonial") or "").strip()
-    attribution = (fields.get("Name") or "").strip()
+    attribution = (fields.get("Name") or "").strip() or "Anonymous"
     if not body:
         return None
     # quote=False because we're inserting into element text, not attribute values;
     # quotes don't need escaping there and the source is uglier with &#x27;.
     body_html = html.escape(body, quote=False)
-    if attribution:
-        attr_html = f"<em>— {html.escape(attribution, quote=False)}</em>"
-        return f'    <div class="testimonial">{body_html}{attr_html}</div>'
-    return f'    <div class="testimonial">{body_html}</div>'
+    attr_html = f"<em>— {html.escape(attribution, quote=False)}</em>"
+    return f'    <div class="testimonial">{body_html}{attr_html}</div>'
 
 
 def sort_records(records):
-    # Oldest first — matches the existing page's natural order of arrival.
-    return sorted(records, key=lambda r: r.get("createdTime", ""))
+    # Newest first.
+    return sorted(records, key=lambda r: r.get("createdTime", ""), reverse=True)
 
 
 def render_all(records):

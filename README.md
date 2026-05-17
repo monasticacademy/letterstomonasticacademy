@@ -19,7 +19,7 @@ Open the [**Testimonials**](https://airtable.com/app3KoZGg1uwP1RZn/tblPhcAnbKSGr
 - Base: **Community** (`app3KoZGg1uwP1RZn`)
 - Table: **Testimonials** (`tblPhcAnbKSGrDgwn`)
 - Fields:
-  - `Name` — public attribution shown under the testimonial (e.g. "Anonymous", "Rhia")
+  - `Name` — public attribution shown under the testimonial (e.g. "Rhia"). Blank → renders as "Anonymous".
   - `Testimonial` — the body text
   - `Status` — `Needs Review` (default) / `Publish` / `Rejected`
   - `Related Community Member` — internal-only link to a person; not rendered on the site
@@ -56,6 +56,6 @@ Open the [**Testimonials**](https://airtable.com/app3KoZGg1uwP1RZn/tblPhcAnbKSGr
 |---|---|
 | Edit a testimonial | Edit the row in Airtable; next sync (≤15 min) updates the site |
 | Reject something already published | Change `Status` to `Rejected`; next sync removes it |
-| Reorder | Currently sorted by Airtable's createdTime (oldest first). Reordering would need an `Order` field + a small script tweak |
+| Reorder | Currently sorted by Airtable's createdTime (newest first). Reordering would need an `Order` field + a small script tweak |
 | Change the site design | Edit `index.html` / `testimonials.html`, push (or PR). The Tests check will appear on the PR |
 | Force an immediate sync | GitHub → Actions → "Sync testimonials from Airtable" → "Run workflow" |
